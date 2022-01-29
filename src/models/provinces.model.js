@@ -11,6 +11,10 @@ const covidProvinces = new Schema(
     totalCaseExcludeabroad: { type: Number, default: 0 },
     newDeath: { type: Number, default: 0 },
     totalDeath: { type: Number, default: 0 },
+    levelNewCase: { type: String, enum: ["low", "medium", "high"] },
+    levelTotalCase: { type: String, enum: ["low", "medium", "high"] },
+    levelNewDeath: { type: String, enum: ["low", "medium", "high"] },
+    levelTotalDeath: { type: String, enum: ["low", "medium", "high"] },
     updateDate: { type: Date },
   },
   {

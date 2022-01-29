@@ -36,6 +36,17 @@ module.exports.importProvinces = async () => {
     throw { message: "data provinces not found", statusCode: 404 };
   }
 
+  const [totalLvNewCase, totalLvCase, totalLvNewDeath, totalLvDeath] = [
+    provinces.reduce((sum, pro) => sum + parseInt(pro.new_case), 0) /
+      provinces.length,
+    provinces.reduce((sum, pro) => sum + parseInt(pro.total_case), 0) /
+      provinces.length,
+    provinces.reduce((sum, pro) => sum + parseInt(pro.new_death), 0) /
+      provinces.length,
+    provinces.reduce((sum, pro) => sum + parseInt(pro.total_death), 0) /
+      provinces.length,
+  ];
+
   provinces = provinces.map((province) => {
     const convertProvinces = {
       txnDate: province.txn_date,
@@ -46,6 +57,10 @@ module.exports.importProvinces = async () => {
       totalCaseExcludeabroad: province.total_case_excludeabroad,
       newDeath: province.new_death,
       totalDeath: province.total_death,
+      levelNewCase: this.calculateRisk(totalLvNewCase, province.new_case),
+      levelTotalCase: this.calculateRisk(totalLvCase, province.total_case),
+      levelNewDeath: this.calculateRisk(totalLvNewDeath, province.new_death),
+      levelTotalDeath: this.calculateRisk(totalLvDeath, province.total_death),
       updateDate: province.update_date,
     };
 
@@ -82,4 +97,16 @@ module.exports.covidProvinces = async () => {
   }
 
   return result;
+};
+
+module.exports.calculateRisk = (avg, score) => {
+  const indicator = avg / 3;
+  switch (true) {
+    case score >= avg + indicator:
+      return "high";
+    case score < avg + indicator && score >= avg - indicator:
+      return "medium";
+    default:
+      return "low";
+  }
 };
