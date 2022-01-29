@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const func = require("../functions/covidDiary");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -18,6 +19,15 @@ router.get("/healthcheck", async (req, res, next) => {
       timestamp: Date.now(),
     };
     res.status(200).send(healthcheck).end();
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/diary", async (req, res, next) => {
+  try {
+    const result = await func.covidDiary();
+    res.status(200).send(result).end();
   } catch (err) {
     next(err);
   }
