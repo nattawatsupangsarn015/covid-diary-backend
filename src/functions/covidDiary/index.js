@@ -87,9 +87,13 @@ module.exports.covidDiary = async () => {
   return result;
 };
 
-module.exports.covidProvinces = async () => {
+module.exports.covidProvinces = async (date) => {
+  if (!this.isValidDate(new Date(date))) {
+    throw { message: "wrong type date", statusCode: 400 };
+  }
+
   const result = await provincesModel.find({
-    txnDate: new Date().toJSON().slice(0, 10),
+    txnDate: new Date(date).toJSON().slice(0, 10),
   });
 
   if (!result || !result.length) {
@@ -109,4 +113,8 @@ module.exports.calculateRisk = (avg, score) => {
     default:
       return "low";
   }
+};
+
+module.exports.isValidDate = (date) => {
+  return date instanceof Date && !isNaN(date);
 };

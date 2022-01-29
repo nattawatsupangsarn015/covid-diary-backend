@@ -35,7 +35,8 @@ router.get("/diary", async (req, res, next) => {
 
 router.get("/by-provinces", async (req, res, next) => {
   try {
-    const result = await func.covidProvinces();
+    const { date } = req.query;
+    const result = await func.covidProvinces(date);
     res.status(200).send(result).end();
   } catch (err) {
     next(err);
