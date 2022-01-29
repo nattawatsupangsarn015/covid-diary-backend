@@ -33,6 +33,15 @@ router.get("/diary", async (req, res, next) => {
   }
 });
 
+router.get("/by-provinces", async (req, res, next) => {
+  try {
+    const result = await func.covidProvinces();
+    res.status(200).send(result).end();
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Error handler
 router.use((err, req, res, next) => {
   console.log({ err });
