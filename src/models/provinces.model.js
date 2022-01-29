@@ -24,4 +24,6 @@ const covidProvinces = new Schema(
   }
 );
 
+covidProvinces.index({ txnDate: 1, province: 1 });
+
 module.exports = mongoose.model("covid-provinces", covidProvinces);

@@ -20,6 +20,8 @@ router.options("*", cors({ credentials: true, origin: true }));
 router.use(cors({ origin: true, credentials: true }));
 router.use(connectDatabase);
 
+require("./middleware/cronJob");
+
 router.use("/covid-diary", require("./api/get"));
 router.use("/covid-diary", require("./api/put"));
 router.use("/covid-diary", require("./api/post"));

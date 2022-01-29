@@ -21,4 +21,6 @@ const covidDiary = new Schema(
   }
 );
 
+covidDiary.index({ txnDate: 1 });
+
 module.exports = mongoose.model("covid-diary", covidDiary);
