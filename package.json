@@ -1,0 +1,32 @@
+{
+  "name": "covid-diary-backend",
+  "version": "1.0.0",
+  "description": "This project was created for analyze about covid19",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nattawatsupangsarn015/covid-diary-backend.git"
+  },
+  "author": "Ice&Max",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nattawatsupangsarn015/covid-diary-backend/issues"
+  },
+  "homepage": "https://github.com/nattawatsupangsarn015/covid-diary-backend#readme",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "cors": "^2.8.5",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.8",
+    "node-schedule": "^2.1.0",
+    "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "14.x"
+  }
+}
