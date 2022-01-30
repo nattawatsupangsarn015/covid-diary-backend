@@ -26,7 +26,8 @@ router.get("/healthcheck", async (req, res, next) => {
 
 router.get("/diary", async (req, res, next) => {
   try {
-    const result = await func.covidDiary();
+    const { date } = req.query;
+    const result = await func.covidDiary(date);
     res.status(200).send(result).end();
   } catch (err) {
     next(err);
