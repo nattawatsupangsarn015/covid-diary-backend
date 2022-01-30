@@ -5,11 +5,16 @@ mongoose.Promise = global.Promise;
 let isConnected = 0;
 let db;
 
+const DB_CONNECTION =
+  process.env.NODE_ENV === "local"
+    ? process.env.DB_CONNECTION
+    : process.env.DB_PROD_CONNECTION;
+
 module.exports = async function connectToDatabase() {
   if (!isConnected) {
     console.log("connectToDatabase..., using new database connection");
     db = mongoose
-      .connect(process.env.DB_CONNECTION, {
+      .connect(DB_CONNECTION, {
         useNewUrlParser: true,
         bufferCommands: false,
       })
