@@ -24,6 +24,7 @@ services:
     env_file:
       - ./.env
     volumes:
+      - ./src/config/database/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
       - ./src/config/database:/data/db
 volumes:
   dependencies:
