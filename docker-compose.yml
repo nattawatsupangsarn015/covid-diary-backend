@@ -11,5 +11,12 @@ services:
     ports:
       - 3000:3000
     command: npm run start
+  database:
+    image: mongo:4.4
+    ports:
+      - 27017:27017
+    container_name: mongodb
+    volumes:
+      - ./src/config/database:/data/db
 volumes:
   dependencies:
