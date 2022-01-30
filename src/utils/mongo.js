@@ -10,6 +10,8 @@ const DB_CONNECTION =
     ? process.env.DB_CONNECTION
     : process.env.DB_PROD_CONNECTION;
 
+console.log(process.env.NODE_ENV);
+
 module.exports = async function connectToDatabase() {
   if (!isConnected) {
     console.log("connectToDatabase..., using new database connection");

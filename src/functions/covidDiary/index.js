@@ -79,15 +79,22 @@ module.exports.importProvinces = async () => {
   return "OK";
 };
 
-module.exports.covidDiary = async () => {
+module.exports.covidDiary = async (date) => {
+  if (!date) date = new Date();
+  if (!this.isValidDate(new Date(date))) {
+    throw { message: "wrong type date", statusCode: 400 };
+  }
+
   const result = await diaryModel.findOne({
-    txnDate: new Date().toJSON().slice(0, 10),
+    txnDate: new Date(date).toJSON().slice(0, 10),
   });
+
   if (!result) throw { message: "data not found", statusCode: 404 };
   return result;
 };
 
 module.exports.covidProvinces = async (date) => {
+  if (!date) date = new Date();
   if (!this.isValidDate(new Date(date))) {
     throw { message: "wrong type date", statusCode: 400 };
   }
