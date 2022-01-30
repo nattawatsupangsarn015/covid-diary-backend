@@ -43,6 +43,8 @@ router.get("/by-provinces", async (req, res, next) => {
   }
 });
 
+// 
+
 // Error handler
 router.use((err, req, res, next) => {
   console.log({ err });
